@@ -16,3 +16,6 @@ def country_info(request, country):
     template = loader.get_template("country.html")
     context = {'country': c}
     return HttpResponse(template.render(context, request))
+
+def regions(request):
+

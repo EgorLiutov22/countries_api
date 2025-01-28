@@ -25,6 +25,7 @@ class Country:
         self.continents = country_dict['continents']
         self.flags = country_dict['flags']
         self.capital_info = country_dict['capitalInfo']
+        self.region = country_dict['region']
 
 
 def countries_all():
@@ -33,8 +34,20 @@ def countries_all():
     countries = [Country(c) for c in r.json()]
     return countries
 
+def country_name(name):
+    r = requests.get(url + f'name/{name}', verify=False)
+    country = Country(r.json()[0])
+    return country
+
+def regions():
+    countries = countries_all()
+    regions = {c.region for c in countries}
+    return regions
 
 
 
 if __name__ == '__main__':
     countries_all()
+    c = country_name('South Georgia')
+    print(c.name_ru)
+    print(regions())
