@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import loader
 
-from .req import countries_all, country_name
+from .req import countries_all, country_name, regions_api
 
 
 def view_all(request):

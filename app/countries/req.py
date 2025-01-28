@@ -39,7 +39,7 @@ def country_name(name):
     country = Country(r.json()[0])
     return country
 
-def regions():
+def regions_api():
     countries = countries_all()
     regions = {c.region for c in countries}
     return regions
@@ -50,4 +50,4 @@ if __name__ == '__main__':
     countries_all()
     c = country_name('South Georgia')
     print(c.name_ru)
-    print(regions())
+    print(regions_api())
