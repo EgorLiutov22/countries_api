@@ -15,7 +15,11 @@ class Country:
         if 'currencies' in country_dict:
             self.currencies = country_dict['currencies']
         if 'capital' in country_dict:
-            self.capital = country_dict['capital']
+            self.capital = country_dict['capital'][0]
+            if len(country_dict['capital']) > 1:
+                self.other_capital = country_dict['capital'][1:]
+        else:
+            self.capital = None
         self.coords = country_dict['latlng']
         if 'languages' in country_dict:
             self.lang = country_dict['languages']
@@ -34,16 +38,23 @@ def countries_all():
     countries = [Country(c) for c in r.json()]
     return countries
 
+
 def country_name(name):
     r = requests.get(url + f'name/{name}', verify=False)
     country = Country(r.json()[0])
     return country
+
 
 def regions_api():
     countries = countries_all()
     regions = {c.region for c in countries}
     return regions
 
+
+def get_capitals():
+    r = countries_all()
+    capitals = [country.capital for country in r if country.capital]
+    return capitals
 
 
 if __name__ == '__main__':
