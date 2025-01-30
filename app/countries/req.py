@@ -15,7 +15,7 @@ class Country:
         if 'currencies' in country_dict:
             self.currencies = country_dict['currencies']
         if 'capital' in country_dict:
-            self.capital = country_dict['capital'][0]
+            self.capital = Capital(country_dict['capital'][0], self.name_en, country_dict['capitalInfo'])
             if len(country_dict['capital']) > 1:
                 self.other_capital = country_dict['capital'][1:]
         else:
@@ -30,6 +30,15 @@ class Country:
         self.flags = country_dict['flags']
         self.capital_info = country_dict['capitalInfo']
         self.region = country_dict['region']
+
+
+class Capital:
+    def __init__(self, name, country, info, other_capital=None):
+        self.name = name
+        self.country = country
+        self.info = info
+        if other_capital:
+            self.other_capital = other_capital
 
 
 def countries_all():
@@ -55,6 +64,13 @@ def get_capitals():
     r = countries_all()
     capitals = [country.capital for country in r if country.capital]
     return capitals
+
+
+def capital(name):
+    capitals = get_capitals()
+    for c in capitals:
+        if c.name == name:
+            return c
 
 
 if __name__ == '__main__':

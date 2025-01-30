@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import view_all, country_info, regions, capitals
+from .views import view_all, country_info, regions, capitals, capital_info
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('countries/<str:country>', country_info),
     path('regions/', regions),
     path('capitals/', capitals),
+    path('capitals/<str:name>', capital_info),
 ]
