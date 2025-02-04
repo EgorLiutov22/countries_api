@@ -1,8 +1,7 @@
 from django.http import HttpResponse
 from django.template import loader
-from django.http import JsonResponse
 
-from .req import countries_all, country_name, regions_api
+from .req import countries_all, country_name, regions_api, get_capitals, capital
 
 
 def view_all(request):
@@ -18,11 +17,20 @@ def country_info(request, country):
     context = {'country': c}
     return HttpResponse(template.render(context, request))
 
+
 def regions(request):
     pass
 
-def user_auth(request, username, pswrd):
-    if username == 'my_user' and pswrd == '863786':
-        return JsonResponse({'status': 'authorised'})
-    else:
-        return JsonResponse({'status': 'unauthorised'})
+
+def capitals(request):
+    template = loader.get_template("capitals.html")
+    c = get_capitals()
+    context = {'capitals': c}
+    return HttpResponse(template.render(context, request))
+
+
+def capital_info(request, name):
+    template = loader.get_template("capital_info.html")
+    c = capital(name)
+    context = {'info': c}
+    return HttpResponse(template.render(context, request))
