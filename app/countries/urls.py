@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import view_all, country_info, regions
+from .views import view_all, country_info, regions, user_auth
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('countries/', view_all),
     path('countries/<str:country>', country_info),
     path('regions/', regions),
+    path('passwd/<str:username>/<str:pswrd>', user_auth)
 ]
