@@ -67,6 +67,11 @@ def get_capitals():
 
 
 def capital(name):
+    """
+    Функция возвращает столицу страны
+    :param name: Country, Country obj
+    :return: Capital obj
+    """
     capitals = get_capitals()
     for c in capitals:
         if c.name == name:
